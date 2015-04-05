@@ -46,8 +46,7 @@ gulp.task "dev", [
   "images"
   "jade"
   "stylus"
-  "webpack:client"
-  "webpack:admin"
+  "webpack"
 ]
 
 
@@ -55,12 +54,12 @@ gulp.task "dev", [
 # Jade Build Live Reload
 gulp.task "static_livereload", ->
   c.uglify = false
-  runSequence ["webpack:client", "browsersync"]
+  runSequence ["webpack", "browsersync"]
 
 # Watching
 gulp.task "script_livereload", ->
   c.uglify = false
-  runSequence ["webpack:client", "browsersync:proxy"]
+  runSequence ["webpack", "browsersync:proxy"]
 
 
 # Watch
@@ -70,7 +69,7 @@ gulp.task "watch", ->
     "#{c.src}#{c.scripts}**/*.js",
     "#{c.src}#{c.scripts}**/*.jsx"
   ], ->
-    runSequence ["webpack:client"]
+    runSequence ["webpack"]
 
   $.watch ["#{c.src}#{c.html}*.jade", "#{c.src}#{c.html}**/*.jade"], ["jade"], ->
     runSequence ["jade"]
@@ -99,10 +98,10 @@ gulp.task "browsersync", ->
 # Webpack
 # Configration
 # '/webpack-config.coffee'
-gulp.task "webpack:client", ->
+gulp.task "webpack", ->
 
   # Client
-  gulp.src "#{c.src}#{c.scripts}#{c.client}app.js"
+  gulp.src "#{c.src}#{c.scripts}app.js"
   .pipe $.webpack wpackconfig.client
   .pipe $.if c.uglify, do $.uglify
   .pipe browserSync.reload {stream: true}
