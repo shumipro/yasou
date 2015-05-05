@@ -2,7 +2,8 @@ gulp            = require 'gulp'
 $               = do require 'gulp-load-plugins'
 runSequence     = require 'run-sequence'
 browserSync     = require 'browser-sync'
-wpackconfig     = require './webpack-config.coffee'
+browserify      = require 'browserify';
+babelify        = require 'babelify';
 source          = require 'vinyl-source-stream'
 reload          = browserSync.reload
 
@@ -46,7 +47,7 @@ gulp.task "dev", [
   "images"
   "jade"
   "stylus"
-  "webpack"
+  "script"
 ]
 
 
@@ -54,12 +55,12 @@ gulp.task "dev", [
 # Jade Build Live Reload
 gulp.task "static_livereload", ->
   c.uglify = false
-  runSequence ["webpack", "browsersync"]
+  runSequence ["script", "browsersync"]
 
 # Watching
 gulp.task "script_livereload", ->
   c.uglify = false
-  runSequence ["webpack", "browsersync:proxy"]
+  runSequence ["script", "browsersync:proxy"]
 
 
 # Watch
@@ -69,7 +70,7 @@ gulp.task "watch", ->
     "#{c.src}#{c.scripts}**/*.js",
     "#{c.src}#{c.scripts}**/*.jsx"
   ], ->
-    runSequence ["webpack"]
+    runSequence ["script"]
 
   $.watch ["#{c.src}#{c.html}*.jade", "#{c.src}#{c.html}**/*.jade"], ["jade"], ->
     runSequence ["jade"]
@@ -95,19 +96,18 @@ gulp.task "browsersync", ->
     open: false
 
 
-# Webpack
-# Configration
-# '/webpack-config.coffee'
-gulp.task "webpack", ->
-
-  # Client
-  gulp.src "#{c.src}#{c.scripts}app.js"
-  .pipe $.webpack wpackconfig.client
-  .pipe $.if c.uglify, do $.uglify
+# Babelify, Browserify
+gulp.task "script", ->
+  browserify
+    entries: "#{c.src}#{c.scripts}app.js"
+    extensions: ["js", "jsx"]
+    debug: true
+  .transform(babelify)
+  .bundle()
+  .pipe source "client.js"
+  .pipe gulp.dest "#{c.public}#{c.scripts}"
   .pipe browserSync.reload {stream: true}
-  .pipe gulp.dest ""
   
-
 # Stylus
 gulp.task "stylus", ->
 
