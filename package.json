@@ -1,0 +1,56 @@
+{
+  "name": "yasou",
+  "version": "1.0.0",
+  "description": "kusa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://tyshgc@github.com/shumipro/yasou.git"
+  },
+  "author": "devmorning",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shumipro/yasou/issues"
+  },
+  "homepage": "https://github.com/shumipro/yasou",
+  "dependencies": {
+    "babel": "^5.0.8",
+    "babel-core": "^5.0.8",
+    "babel-loader": "^5.0.0",
+    "babelify": "^6.0.2",
+    "barracks": "^5.0.3",
+    "browserify": "^10.1.0",
+    "coffee-script": "^1.9.1",
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.0.0",
+    "gulp-coffee": "^2.3.1",
+    "gulp-consolidate": "^0.1.2",
+    "gulp-iconfont": "^1.0.0",
+    "gulp-if": "^1.2.5",
+    "gulp-jade": "^1.0.0",
+    "gulp-load-plugins": "^0.9.0",
+    "gulp-minify-css": "^1.0.0",
+    "gulp-pleeease": "^1.2.0",
+    "gulp-plumber": "^1.0.0",
+    "gulp-react": "^3.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-shell": "^0.4.0",
+    "gulp-stylus": "^2.0.1",
+    "gulp-uglify": "^1.1.0",
+    "gulp-watch": "^4.2.3",
+    "gulp.spritesmith": "^3.5.3",
+    "jsx-loader": "^0.13.1",
+    "lodash": "^3.6.0",
+    "moment": "^2.9.0",
+    "react": "^0.13.1",
+    "react-intl": "^1.2.0",
+    "react-router": "^0.13.2",
+    "run-sequence": "^1.0.2",
+    "stylus-iconfont": "^0.10.1",
+    "vinyl-source-stream": "^1.1.0",
+    "whatwg-fetch": "^0.7.0"
+  }
+}
